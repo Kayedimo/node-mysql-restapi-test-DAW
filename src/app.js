@@ -9,10 +9,14 @@ app.use(express.json())
 app.use(indexRoutes)
 app.use('/api',productosRoutes)
 
+app.get('/', (req, res) => {
+    res.send('API funcionando correctamente')
+})
+
 app.use((req, res, next) => {
     res.status(404).json({
         message: 'endpoint not found'
     })
 })
 
-export default app;
+export default app
