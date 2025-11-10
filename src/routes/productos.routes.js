@@ -18,3 +18,4 @@ router.patch('/productos/:id', updateProductos)
 router.delete('/productos/:id', deleteProductos)
 
 export default router
+
