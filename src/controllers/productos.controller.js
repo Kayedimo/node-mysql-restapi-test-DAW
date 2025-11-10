@@ -1,6 +1,7 @@
 
 import { pool } from "../db.js"
 
+/*GET PRODUCTOS SIN MEJORA
 export const getProductos = async(req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM productos')
@@ -12,6 +13,25 @@ export const getProductos = async(req, res) => {
     }
 }
 
+*/
+export const getProductos = async (req, res) => {
+  try {
+    const { origen } = req.query;
+
+    let query = 'SELECT * FROM productos';
+    let params = [];
+
+    if (origen) {
+      query += ' WHERE origen = ?';
+      params.push(origen);
+    }
+
+    const [rows] = await pool.query(query, params);
+    res.json(rows);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error al obtener productos' });
+  }
+};
 
 export const getProducto = async(req, res) => {
     try {
